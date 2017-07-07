@@ -1,0 +1,15 @@
+{
+  "name": "secp256k1-command",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thorsten Krug",
+  "license": "MIT",
+  "dependencies": {
+    "ethereumjs-util": "^5.1.2",
+    "shelljs": "^0.7.8"
+  }
+}
