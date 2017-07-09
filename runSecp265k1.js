@@ -6,26 +6,22 @@ var msgHash, v, r, s, recovered_address = false, debug = false;
 // Performance test only.
 // var time0 = process.hrtime();
 
-
-//
-// RUN runSecp265k1.js
-//
-// 1) Implemented EcRecover like in solidity
-//    ecrecover(msgHash, v, r, s)
-// node runSecp265k1.js 0xdc0e5f8d3edf066da77f7a5664ca95fc75854567901aca68abb36987a46021b7 0x1b 0x627c13c55329e7eb3b377930e00b1186bf3115a9b4a45218eb8530caefbf1255 0x02edfaeb33a4c5f848b55ad5438c6e50160397bd47811f70df2173e536b4dd2c true
-//
-// 2) Given signature
-// node runSecp265k1.js 0xdc0e5f8d3edf066da77f7a5664ca95fc75854567901aca68abb36987a46021b7 0x627c13c55329e7eb3b377930e00b1186bf3115a9b4a45218eb8530caefbf125502edfaeb33a4c5f848b55ad5438c6e50160397bd47811f70df2173e536b4dd2c1b true
-//
-// Last param triggers debug mode.
-
-//
-// PARAMETER
-//
-// We can have 2 + 1 args: msgHash signature [+debug] -> argv.length <=3
-//  OR
-// msgHash signature.v signature.r signature.s [+debug] -> argc.length >= 4
-//
+if (!process.argv[2]) {
+  shell.echo(
+  "HELP for " +  process.argv[1].replace(/^.*[\\\/]/, '') + " \n \
+  \n \
+  1) Implemented EcRecover like in solidity \n \
+     ecrecover(msgHash, v, r, s) \n \
+  node runSecp265k1.js 0xdc0e5f8d3edf066da77f7a5664ca95fc75854567901aca68abb36987a46021b7 0x1b 0x627c13c55329e7eb3b377930e00b1186bf3115a9b4a45218eb8530caefbf1255 0x02edfaeb33a4c5f848b55ad5438c6e50160397bd47811f70df2173e536b4dd2c true \n \
+  \n \
+  2) Given signature \n \
+  node runSecp265k1.js 0xdc0e5f8d3edf066da77f7a5664ca95fc75854567901aca68abb36987a46021b7 0x627c13c55329e7eb3b377930e00b1186bf3115a9b4a45218eb8530caefbf125502edfaeb33a4c5f848b55ad5438c6e50160397bd47811f70df2173e536b4dd2c1b true \n \
+  \n \
+  Last param triggers debug mode. \n \
+  \n \
+");
+  shell.exit(1);
+}
 
 // Validate message_hash (argv[2])
 if (process.argv[2].substr(0,2) !== '0x' || process.argv[2].length !== 66) {
@@ -34,6 +30,11 @@ if (process.argv[2].substr(0,2) !== '0x' || process.argv[2].length !== 66) {
 else {
   msgHash = process.argv[2].substr(2);
 }
+
+// PARAMETER
+// We can have 2 + 1 args: msgHash signature [+debug] -> argv.length <=3
+//  OR
+// msgHash signature.v signature.r signature.s [+debug] -> argc.length >= 4
 
 // ecrecover(msgHash, signature, [+debug])
 if (process.argv.length <=5) {
