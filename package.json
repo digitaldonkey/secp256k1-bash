@@ -9,7 +9,7 @@
   "author": "Thorsten Krug",
   "license": "MIT",
   "dependencies": {
-    "ethereumjs-util": "^5.1.2",
+    "ethereumjs-util": "^5.2.0",
     "shelljs": "^0.7.8"
   }
 }
